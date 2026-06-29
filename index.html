@@ -3,1015 +3,595 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TippsArena — KI-gestützte Sportwetten Tipps</title>
+<title>TippsArena — KI-gestutzte Sportwetten Tipps</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-:root {
-  --bg: #FFFFFF;
-  --bg-alt: #F5F6F8;
-  --bg-card: #FFFFFF;
-  --border: #E5E7EB;
-  --border-hover: rgba(255,107,0,0.3);
-  --orange: #FF6B00;
-  --orange-light: #FFF3EB;
-  --orange-soft: #FF8C33;
-  --green: #16A34A;
-  --green-bg: #F0FDF4;
-  --red: #DC2626;
-  --text: #111827;
-  --text-secondary: #4B5563;
-  --text-muted: #9CA3AF;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
-  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
-  --shadow-lg: 0 8px 30px rgba(0,0,0,0.1);
-  --radius: 12px;
-  --radius-sm: 8px;
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#FCFCFC;
+  --white:#FFFFFF;
+  --border:#E4E4E4;
+  --text:#1F1F1F;
+  --text-secondary:#6B7280;
+  --text-muted:#9CA3AF;
+  --orange:#FF6B00;
+  --orange-light:#FFF4ED;
+  --orange-dark:#E55F00;
+  --green:#16A34A;
+  --green-bg:#DCFCE7;
+  --dark:#1F1F1F;
+  --radius:8px;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  font-size:15px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
 }
 
-html { scroll-behavior: smooth; }
+/* HEADER */
+.header{
+  position:sticky;top:0;z-index:100;
+  background:var(--bg);
+  border-bottom:1px solid var(--border);
+  height:56px;
+}
+.header-inner{
+  max-width:1280px;margin:0 auto;padding:0 20px;
+  display:flex;align-items:center;justify-content:space-between;height:100%;
+}
+.header-left{display:flex;align-items:center;gap:14px}
+.hamburger{
+  width:40px;height:40px;border-radius:var(--radius);
+  border:1px solid var(--border);background:var(--white);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;flex-direction:column;gap:4px;
+}
+.hamburger span{display:block;width:18px;height:2px;background:var(--text);border-radius:1px}
+.logo{
+  font-weight:800;font-size:1.3rem;text-decoration:none;color:var(--text);
+  display:flex;align-items:center;gap:2px;
+}
+.logo span{color:var(--orange)}
+.header-right{display:flex;align-items:center;gap:8px}
+.hdr-btn{
+  padding:8px 16px;border-radius:var(--radius);
+  font-size:0.85rem;font-weight:600;text-decoration:none;
+  display:flex;align-items:center;gap:6px;
+  border:1px solid var(--border);background:var(--white);color:var(--text);
+  cursor:pointer;font-family:inherit;transition:background 0.15s;
+}
+.hdr-btn:hover{background:var(--bg)}
+.hdr-btn-primary{background:var(--dark);color:#fff;border-color:var(--dark)}
+.hdr-btn-primary:hover{background:#333}
 
-body {
-  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-}
-
-.container { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
-
-/* ─── HEADER ─── */
-.header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: rgba(255,255,255,0.95);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
-}
-.header-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 64px;
-}
-.logo {
-  font-weight: 700;
-  font-size: 1.4rem;
-  text-decoration: none;
-  color: var(--text);
-  display: flex;
-  align-items: center;
-  gap: 2px;
-}
-.logo span { color: var(--orange); }
-.nav { display: flex; align-items: center; gap: 4px; }
-.nav a {
-  color: var(--text-secondary);
-  text-decoration: none;
-  font-size: 0.9rem;
-  font-weight: 500;
-  padding: 8px 14px;
-  border-radius: var(--radius-sm);
-  transition: all 0.15s;
-}
-.nav a:hover { color: var(--text); background: var(--bg-alt); }
-.nav-cta {
-  background: var(--orange) !important;
-  color: #fff !important;
-  font-weight: 600 !important;
-  margin-left: 6px;
-}
-.nav-cta:hover { background: var(--orange-soft) !important; }
-.menu-toggle {
-  display: none;
-  background: none; border: none; cursor: pointer;
-  width: 36px; height: 36px; position: relative;
-}
-.menu-toggle span {
-  display: block; width: 20px; height: 2px;
-  background: var(--text); border-radius: 2px;
-  position: absolute; left: 8px;
-  transition: all 0.3s;
-}
-.menu-toggle span:nth-child(1) { top: 11px; }
-.menu-toggle span:nth-child(2) { top: 17px; }
-.menu-toggle span:nth-child(3) { top: 23px; }
-.menu-toggle.open span:nth-child(1) { transform: rotate(45deg); top: 17px; }
-.menu-toggle.open span:nth-child(2) { opacity: 0; }
-.menu-toggle.open span:nth-child(3) { transform: rotate(-45deg); top: 17px; }
-
-/* ─── HERO ─── */
-.hero {
-  padding: 70px 0 60px;
-  background: var(--bg-alt);
-  border-bottom: 1px solid var(--border);
-}
-.hero-content { max-width: 620px; }
-.hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 5px 14px 5px 8px;
-  border-radius: 100px;
-  background: var(--orange-light);
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--orange);
-  margin-bottom: 22px;
-}
-.hero-badge .dot {
-  width: 7px; height: 7px;
-  background: var(--orange);
-  border-radius: 50%;
-  animation: pulse 2s ease-in-out infinite;
-}
-@keyframes pulse {
-  0%, 100% { opacity: 1; } 50% { opacity: 0.4; }
-}
-.hero h1 {
-  font-size: clamp(2rem, 4.5vw, 2.8rem);
-  font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: -0.5px;
-  margin-bottom: 16px;
-  color: var(--text);
-}
-.hero h1 em {
-  font-style: normal;
-  color: var(--orange);
-}
-.hero p {
-  font-size: 1.05rem;
-  color: var(--text-secondary);
-  line-height: 1.7;
-  margin-bottom: 28px;
-  max-width: 500px;
-}
-.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 13px 26px;
-  background: var(--orange);
-  color: #fff;
-  font-weight: 600;
-  font-size: 0.92rem;
-  border-radius: var(--radius-sm);
-  text-decoration: none;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-.btn-primary:hover { background: var(--orange-soft); transform: translateY(-1px); box-shadow: var(--shadow-md); }
-.btn-ghost {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 13px 26px;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  color: var(--text-secondary);
-  font-weight: 600;
-  font-size: 0.92rem;
-  border-radius: var(--radius-sm);
-  text-decoration: none;
-  transition: all 0.2s;
-}
-.btn-ghost:hover { border-color: var(--text-muted); color: var(--text); }
-.hero-stats {
-  display: flex;
-  gap: 36px;
-  margin-top: 44px;
-  padding-top: 28px;
-  border-top: 1px solid var(--border);
-}
-.stat-value {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text);
-}
-.stat-value span { color: var(--orange); }
-.stat-label {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  margin-top: 2px;
+/* LAYOUT */
+.layout{
+  max-width:1280px;margin:0 auto;padding:0 20px;
+  display:grid;grid-template-columns:280px 1fr;gap:0;min-height:calc(100vh - 56px);
 }
 
-/* ─── SECTIONS ─── */
-section { padding: 70px 0; }
-.section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 28px;
-  flex-wrap: wrap;
-  gap: 12px;
+/* SIDEBAR */
+.sidebar{
+  border-right:1px solid var(--border);
+  padding:24px 24px 24px 0;
+  position:sticky;top:56px;height:calc(100vh - 56px);overflow-y:auto;
 }
-.section-label {
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--orange);
-  margin-bottom: 6px;
+.sidebar-label{
+  font-size:0.78rem;font-weight:600;color:var(--text-muted);
+  margin-bottom:12px;display:flex;align-items:center;gap:6px;
 }
-.section-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text);
-  letter-spacing: -0.3px;
+.sidebar-nav{list-style:none}
+.sidebar-nav li a{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 12px;border-radius:var(--radius);
+  text-decoration:none;color:var(--text);
+  font-size:0.92rem;font-weight:500;
+  transition:background 0.15s;
 }
-.section-desc {
-  color: var(--text-secondary);
-  font-size: 0.95rem;
-  margin-top: 6px;
+.sidebar-nav li a:hover{background:rgba(0,0,0,0.04)}
+.sidebar-nav li a .nav-icon{
+  width:20px;text-align:center;font-size:1rem;opacity:0.7;
 }
-.view-all {
-  color: var(--orange);
-  font-size: 0.88rem;
-  font-weight: 600;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  transition: gap 0.2s;
+.sidebar-card{
+  margin-top:24px;padding:20px;
+  border-radius:var(--radius);
+  background:var(--orange-light);
+  border:1px solid rgba(255,107,0,0.12);
 }
-.view-all:hover { gap: 8px; }
+.sidebar-card h4{
+  color:var(--orange);font-size:0.95rem;font-weight:700;margin-bottom:8px;
+  line-height:1.3;
+}
+.sidebar-card p{font-size:0.82rem;color:var(--text-secondary);margin-bottom:14px;line-height:1.5}
+.sidebar-card .subscribe-form{display:flex;flex-direction:column;gap:8px}
+.sidebar-card input{
+  padding:9px 12px;border-radius:6px;border:1px solid var(--border);
+  font-size:0.82rem;font-family:inherit;background:var(--white);outline:none;
+}
+.sidebar-card input:focus{border-color:var(--orange)}
+.sidebar-card button{
+  padding:9px 12px;border-radius:6px;border:none;
+  background:var(--orange);color:#fff;font-weight:600;
+  font-size:0.82rem;cursor:pointer;font-family:inherit;
+  transition:background 0.15s;
+}
+.sidebar-card button:hover{background:var(--orange-dark)}
 
-/* ─── TIPS CARDS ─── */
-.tips-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-  gap: 16px;
+/* MAIN */
+.main{padding:24px 0 40px 28px}
+
+/* PROMO BANNER */
+.promo-banner{
+  border-radius:var(--radius);
+  background:linear-gradient(135deg,var(--orange),#FF9D4D);
+  padding:32px 36px;
+  color:#fff;
+  margin-bottom:28px;
+  position:relative;overflow:hidden;
 }
-.tip-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 20px;
-  transition: all 0.2s;
-  cursor: pointer;
+.promo-banner::after{
+  content:'';position:absolute;top:-40px;right:-40px;
+  width:180px;height:180px;border-radius:50%;
+  background:rgba(255,255,255,0.1);
 }
-.tip-card:hover {
-  border-color: var(--border-hover);
-  box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
+.promo-logo{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:4px 10px;background:rgba(255,255,255,0.2);border-radius:6px;
+  font-size:0.78rem;font-weight:600;margin-bottom:14px;
 }
-.tip-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16px;
+.promo-banner h2{font-size:1.35rem;font-weight:700;margin-bottom:6px;line-height:1.3;position:relative;z-index:1}
+.promo-banner .promo-sub{font-size:0.92rem;font-weight:600;opacity:0.9;margin-bottom:16px;position:relative;z-index:1}
+.promo-banner .promo-fine{font-size:0.68rem;opacity:0.7;line-height:1.4;position:relative;z-index:1}
+
+/* FEATURED MATCHES */
+.section-header{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:16px;
 }
-.tip-league {
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: var(--orange);
-  background: var(--orange-light);
-  padding: 3px 10px;
-  border-radius: 5px;
-  letter-spacing: 0.5px;
+.section-title{font-size:1.1rem;font-weight:700}
+.view-all{
+  color:var(--text-secondary);font-size:0.85rem;font-weight:500;
+  text-decoration:none;transition:color 0.15s;
 }
-.tip-time { font-size: 0.78rem; color: var(--text-muted); }
-.tip-match {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
-  gap: 10px;
+.view-all:hover{color:var(--orange)}
+
+.matches-scroll{
+  display:flex;gap:10px;overflow-x:auto;padding-bottom:8px;
+  margin-bottom:28px;scroll-snap-type:x mandatory;
 }
-.tip-team { text-align: center; flex: 1; }
-.tip-crest {
-  width: 42px; height: 42px;
-  border-radius: 50%;
-  background: var(--bg-alt);
-  margin: 0 auto 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
+.matches-scroll::-webkit-scrollbar{height:3px}
+.matches-scroll::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+.match-card{
+  flex-shrink:0;width:160px;
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);padding:14px;
+  text-align:center;scroll-snap-align:start;
+  transition:box-shadow 0.2s;cursor:pointer;
 }
-.tip-team-name { font-size: 0.85rem; font-weight: 600; }
-.tip-vs { font-size: 0.72rem; color: var(--text-muted); font-weight: 700; }
-.tip-prediction {
-  background: var(--bg-alt);
-  border-radius: var(--radius-sm);
-  padding: 10px 14px;
-  margin-bottom: 14px;
+.match-card:hover{box-shadow:0 2px 8px rgba(0,0,0,0.08)}
+.match-league{
+  font-size:0.7rem;font-weight:600;color:var(--text-secondary);
+  margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:4px;
 }
-.tip-pred-label {
-  font-size: 0.7rem;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  margin-bottom: 3px;
+.match-league::before{content:'⚽';font-size:0.65rem}
+.match-teams{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:8px}
+.match-flag{
+  width:36px;height:36px;border-radius:50%;
+  background:var(--bg);display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;border:1px solid var(--border);
 }
-.tip-pred-value { font-weight: 700; font-size: 0.92rem; }
-.tip-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.match-codes{
+  display:flex;justify-content:center;gap:16px;
+  font-size:0.78rem;font-weight:700;margin-bottom:6px;
 }
-.tip-confidence {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.82rem;
-}
-.conf-bar {
-  width: 50px; height: 4px;
-  background: #E5E7EB;
-  border-radius: 2px;
-  overflow: hidden;
-}
-.conf-fill {
-  height: 100%;
-  background: var(--orange);
-  border-radius: 2px;
-}
-.conf-pct { color: var(--orange); font-weight: 700; font-size: 0.82rem; }
-.tip-odds {
-  font-size: 0.85rem;
-  font-weight: 700;
-  background: var(--bg-alt);
-  padding: 4px 10px;
-  border-radius: 5px;
+.match-time{font-size:0.75rem;color:var(--text-muted);margin-bottom:8px}
+.match-tips{
+  font-size:0.78rem;font-weight:600;color:var(--orange);
+  display:flex;align-items:center;justify-content:center;gap:4px;
 }
 
-/* ─── COMMUNITY WINS ─── */
-.wins-section { background: var(--bg-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-.wins-track {
-  display: flex;
-  gap: 14px;
-  overflow-x: auto;
-  padding-bottom: 8px;
-  scroll-snap-type: x mandatory;
+/* TIPS LIST */
+.tips-list{margin-bottom:28px}
+.tip-item{
+  padding:16px 0;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:flex-start;gap:10px;
 }
-.wins-track::-webkit-scrollbar { height: 3px; }
-.wins-track::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-.win-card {
-  flex-shrink: 0;
-  width: 250px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 16px;
-  scroll-snap-align: start;
-  transition: box-shadow 0.2s;
+.tip-item:last-child{border-bottom:none}
+.tip-dot{
+  width:6px;height:6px;border-radius:50%;background:var(--text);
+  margin-top:8px;flex-shrink:0;
 }
-.win-card:hover { box-shadow: var(--shadow-sm); }
-.win-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 12px;
+.tip-content{flex:1}
+.tip-title{
+  font-size:0.95rem;font-weight:600;color:var(--text);
+  text-decoration:none;display:block;margin-bottom:3px;
+  transition:color 0.15s;
 }
-.win-avatar {
-  width: 34px; height: 34px;
-  border-radius: 50%;
-  background: var(--orange);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 0.78rem;
-  color: #fff;
-}
-.win-user { font-weight: 600; font-size: 0.85rem; }
-.win-time { font-size: 0.72rem; color: var(--text-muted); }
-.win-details {
-  font-size: 0.82rem;
-  color: var(--text-secondary);
-  margin-bottom: 10px;
-  line-height: 1.5;
-}
-.win-amount {
-  font-weight: 700;
-  font-size: 1.15rem;
-  color: var(--green);
-}
+.tip-title:hover{color:var(--orange)}
+.tip-meta{font-size:0.82rem;color:var(--text-secondary)}
 
-/* ─── HOW IT WORKS ─── */
-.steps-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+/* BOOST CARD */
+.boost-card{
+  display:flex;align-items:center;gap:12px;
+  border-radius:var(--radius);overflow:hidden;
+  margin-bottom:16px;border:1px solid var(--border);
 }
-.step-card { text-align: center; }
-.step-num {
-  width: 56px; height: 56px;
-  border-radius: 14px;
-  background: var(--orange-light);
-  color: var(--orange);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 16px;
-  font-size: 1.4rem;
-  font-weight: 700;
+.boost-logo{
+  width:52px;height:52px;background:var(--bg);
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.75rem;font-weight:800;border-right:1px solid var(--border);
+  flex-shrink:0;
 }
-.step-title {
-  font-weight: 700;
-  font-size: 1rem;
-  margin-bottom: 8px;
+.boost-content{
+  flex:1;background:var(--orange);color:#fff;
+  padding:12px 16px;display:flex;justify-content:center;
+  flex-direction:column;align-items:center;
 }
-.step-desc {
-  font-size: 0.88rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-  max-width: 280px;
-  margin: 0 auto;
-}
+.boost-odds{font-size:0.88rem;font-weight:700}
+.boost-odds s{opacity:0.7;margin-right:6px}
+.boost-label{font-size:0.75rem;opacity:0.9}
 
-/* ─── BOOKMAKERS ─── */
-.bookie-section { background: var(--bg-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-.bookie-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 16px;
+/* OFFER CARD */
+.offer-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);padding:16px 20px;
+  margin-bottom:16px;display:flex;align-items:center;
+  justify-content:space-between;gap:16px;
 }
-.bookie-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 24px;
-  text-align: center;
-  transition: all 0.2s;
+.offer-info .offer-small{font-size:0.78rem;color:var(--text-muted);margin-bottom:2px}
+.offer-info .offer-headline{font-size:0.95rem;font-weight:700}
+.offer-info .offer-fine{font-size:0.68rem;color:var(--text-muted);margin-top:4px;line-height:1.3}
+.offer-claim{
+  padding:10px 20px;border-radius:var(--radius);
+  border:1px solid var(--border);background:var(--white);
+  font-size:0.85rem;font-weight:600;cursor:pointer;
+  font-family:inherit;display:flex;align-items:center;gap:6px;
+  white-space:nowrap;text-decoration:none;color:var(--text);
+  transition:all 0.15s;
 }
-.bookie-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
-.bookie-icon {
-  width: 50px; height: 50px;
-  border-radius: 12px;
-  margin: 0 auto 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  font-weight: 800;
-  color: #fff;
-}
-.bookie-name { font-weight: 700; font-size: 1rem; margin-bottom: 4px; }
-.bookie-bonus {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: var(--orange);
-  margin-bottom: 2px;
-}
-.bookie-bonus-label { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 12px; }
-.bookie-stars { color: var(--orange); font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 16px; }
-.bookie-features { list-style: none; text-align: left; margin-bottom: 18px; }
-.bookie-features li {
-  font-size: 0.82rem;
-  color: var(--text-secondary);
-  padding: 4px 0;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.bookie-features li::before { content: '✓'; color: var(--green); font-weight: 700; }
-.bookie-cta {
-  display: block;
-  width: 100%;
-  padding: 11px;
-  background: var(--orange);
-  color: #fff;
-  font-weight: 600;
-  font-size: 0.88rem;
-  border: none;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.2s;
-}
-.bookie-cta:hover { background: var(--orange-soft); }
+.offer-claim:hover{border-color:var(--orange);color:var(--orange)}
 
-/* ─── NEWSLETTER ─── */
-.newsletter {
-  background: var(--bg);
+/* ARTICLE CARD */
+.article-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);padding:20px;
+  margin-bottom:16px;
 }
-.newsletter-inner {
-  max-width: 520px;
-  margin: 0 auto;
-  text-align: center;
+.article-card h3{font-size:1.05rem;font-weight:700;margin-bottom:8px;line-height:1.35}
+.article-card h3 a{color:var(--text);text-decoration:none;transition:color 0.15s}
+.article-card h3 a:hover{color:var(--orange)}
+.article-card p{font-size:0.88rem;color:var(--text-secondary);line-height:1.6;margin-bottom:12px}
+.article-author{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-top:12px;border-top:1px solid var(--border);
 }
-.newsletter-inner .section-title { margin-bottom: 8px; }
-.newsletter-inner .section-desc { margin: 0 auto 28px; }
-.newsletter-form {
-  display: flex;
-  gap: 10px;
-  max-width: 440px;
-  margin: 0 auto;
+.author-info{display:flex;align-items:center;gap:8px}
+.author-avatar{
+  width:28px;height:28px;border-radius:50%;
+  background:var(--orange);display:flex;align-items:center;justify-content:center;
+  font-size:0.7rem;font-weight:700;color:#fff;
 }
-.newsletter-form input {
-  flex: 1;
-  padding: 12px 16px;
-  background: var(--bg-alt);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  color: var(--text);
-  font-size: 0.9rem;
-  font-family: inherit;
-  outline: none;
-  transition: border-color 0.2s;
+.author-name{font-size:0.82rem;font-weight:600}
+.article-actions{display:flex;gap:12px}
+.article-actions a{
+  font-size:0.78rem;color:var(--text-muted);text-decoration:none;
+  display:flex;align-items:center;gap:4px;
+  transition:color 0.15s;
 }
-.newsletter-form input::placeholder { color: var(--text-muted); }
-.newsletter-form input:focus { border-color: var(--orange); }
-.newsletter-form button {
-  padding: 12px 24px;
-  background: var(--orange);
-  color: #fff;
-  font-weight: 600;
-  font-size: 0.9rem;
-  border: none;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  font-family: inherit;
-  white-space: nowrap;
-  transition: all 0.2s;
-}
-.newsletter-form button:hover { background: var(--orange-soft); }
-.newsletter-note { font-size: 0.75rem; color: var(--text-muted); margin-top: 12px; }
+.article-actions a:hover{color:var(--orange)}
 
-/* ─── FOOTER ─── */
-.footer {
-  border-top: 1px solid var(--border);
-  padding: 50px 0 0;
-  background: var(--bg-alt);
+/* FOOTER */
+.footer{
+  border-top:1px solid var(--border);
+  background:var(--bg);padding:40px 0 20px;
 }
-.footer-grid {
-  display: grid;
-  grid-template-columns: 2fr repeat(3, 1fr);
-  gap: 36px;
-  margin-bottom: 40px;
+.footer-inner{max-width:1280px;margin:0 auto;padding:0 20px}
+.footer-grid{
+  display:grid;grid-template-columns:2fr repeat(3,1fr);
+  gap:32px;margin-bottom:32px;
 }
-.footer-brand .logo { margin-bottom: 12px; }
-.footer-brand p {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  line-height: 1.7;
-  max-width: 260px;
+.footer-brand .logo{margin-bottom:10px}
+.footer-brand p{font-size:0.82rem;color:var(--text-secondary);line-height:1.6;max-width:240px}
+.footer-col h4{font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+.footer-col a{display:block;font-size:0.85rem;color:var(--text-secondary);text-decoration:none;padding:3px 0;transition:color 0.15s}
+.footer-col a:hover{color:var(--orange)}
+.footer-bottom{
+  border-top:1px solid var(--border);padding-top:16px;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;
 }
-.footer-social {
-  display: flex;
-  gap: 8px;
-  margin-top: 16px;
+.footer-legal{font-size:0.75rem;color:var(--text-muted)}
+.footer-age{display:flex;align-items:center;gap:8px}
+.age-badge{
+  width:28px;height:28px;border:2px solid #DC2626;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:0.7rem;color:#DC2626;flex-shrink:0;
 }
-.footer-social a {
-  width: 34px; height: 34px;
-  border-radius: var(--radius-sm);
-  background: var(--bg);
-  border: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-secondary);
-  text-decoration: none;
-  font-size: 0.9rem;
-  transition: all 0.15s;
-}
-.footer-social a:hover { border-color: var(--orange); color: var(--orange); }
-.footer-col h4 {
-  font-size: 0.78rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1.2px;
-  color: var(--text);
-  margin-bottom: 14px;
-}
-.footer-col a {
-  display: block;
-  color: var(--text-secondary);
-  text-decoration: none;
-  font-size: 0.88rem;
-  padding: 4px 0;
-  transition: color 0.15s;
-}
-.footer-col a:hover { color: var(--orange); }
-.footer-bottom {
-  border-top: 1px solid var(--border);
-  padding: 20px 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 14px;
-}
-.footer-legal { font-size: 0.78rem; color: var(--text-muted); }
-.footer-age {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.age-badge {
-  width: 32px; height: 32px;
-  border: 2px solid var(--red);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  font-size: 0.78rem;
-  color: var(--red);
-  flex-shrink: 0;
-}
-.footer-age span {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  line-height: 1.4;
-}
+.footer-age span{font-size:0.72rem;color:var(--text-muted);line-height:1.4}
 
-/* ─── RESPONSIVE ─── */
-@media (max-width: 900px) {
-  .nav { display: none; }
-  .nav.open {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 64px; left: 0; right: 0;
-    background: rgba(255,255,255,0.98);
-    backdrop-filter: blur(12px);
-    padding: 12px 20px;
-    border-bottom: 1px solid var(--border);
-    box-shadow: var(--shadow-lg);
-  }
-  .nav.open a { padding: 12px 14px; }
-  .menu-toggle { display: block; }
-  .steps-grid { grid-template-columns: 1fr; gap: 28px; }
-  .footer-grid { grid-template-columns: 1fr 1fr; }
-  .hero-stats { gap: 24px; flex-wrap: wrap; }
+/* MOBILE */
+@media(max-width:900px){
+  .layout{grid-template-columns:1fr}
+  .sidebar{display:none}
+  .main{padding:20px 0}
+  .footer-grid{grid-template-columns:1fr 1fr}
 }
-@media (max-width: 600px) {
-  .hero { padding: 50px 0 40px; }
-  .hero-actions { flex-direction: column; align-items: stretch; }
-  .btn-primary, .btn-ghost { justify-content: center; }
-  .tips-grid { grid-template-columns: 1fr; }
-  .bookie-grid { grid-template-columns: 1fr; }
-  .newsletter-form { flex-direction: column; }
-  .footer-grid { grid-template-columns: 1fr; gap: 24px; }
-  .footer-bottom { flex-direction: column; text-align: center; }
-  .footer-age { justify-content: center; }
+@media(max-width:600px){
+  .header-right .hdr-btn:not(.hdr-btn-primary){display:none}
+  .footer-grid{grid-template-columns:1fr;gap:20px}
+  .footer-bottom{flex-direction:column;text-align:center}
+  .footer-age{justify-content:center}
 }
-
-/* ─── REVEAL ─── */
-.reveal {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.5s ease-out;
-}
-.reveal.visible { opacity: 1; transform: translateY(0); }
 </style>
 </head>
 <body>
 
 <header class="header">
-  <div class="container header-inner">
-    <a href="#" class="logo">Tipps<span>Arena</span></a>
-    <nav class="nav" id="nav">
-      <a href="#tipps">Tipps</a>
-      <a href="#fussball">Fussball</a>
-      <a href="#wettanbieter">Wettanbieter</a>
-      <a href="#">Tools</a>
-      <a href="#">Angebote</a>
-      <a href="#newsletter" class="nav-cta">Kostenlos starten</a>
-    </nav>
-    <button class="menu-toggle" id="menuToggle" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+  <div class="header-inner">
+    <div class="header-left">
+      <button class="hamburger" id="menuBtn"><span></span><span></span><span></span></button>
+      <a href="#" class="logo">Tipps<span>Arena</span></a>
+    </div>
+    <div class="header-right">
+      <a href="#" class="hdr-btn">&#127381; Angebote</a>
+      <a href="#" class="hdr-btn hdr-btn-primary">Beitreten</a>
+      <a href="#" class="hdr-btn">Anmelden</a>
+      <a href="#" class="hdr-btn">&#128203; Wettschein</a>
+    </div>
   </div>
 </header>
 
-<section class="hero">
-  <div class="container">
-    <div class="hero-content">
-      <div class="hero-badge">
-        <span class="dot"></span>
-        KI-Analyse aktiv — 247 Spiele heute gescannt
-      </div>
-      <h1>Kostenlose Wett-Tipps.<br><em>Jeden Tag neu.</em></h1>
-      <p>Unsere KI analysiert Statistiken, Formkurven und historische Daten aus 400+ Ligen und liefert dir treffsichere Vorhersagen.</p>
-      <div class="hero-actions">
-        <a href="#tipps" class="btn-primary">
-          Heutige Tipps ansehen
-          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-        <a href="#so-funktionierts" class="btn-ghost">So funktioniert's</a>
-      </div>
-      <div class="hero-stats">
-        <div>
-          <div class="stat-value">73<span>%</span></div>
-          <div class="stat-label">Trefferquote (30 Tage)</div>
-        </div>
-        <div>
-          <div class="stat-value">1.247<span>+</span></div>
-          <div class="stat-label">Aktive Mitglieder</div>
-        </div>
-        <div>
-          <div class="stat-value">12.840<span>€</span></div>
-          <div class="stat-label">Community-Gewinne diese Woche</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="tipps">
-  <div class="container">
-    <div class="section-header reveal">
-      <div>
-        <div class="section-label">Heutige Tipps</div>
-        <h2 class="section-title">KI-Vorhersagen fur heute</h2>
-        <p class="section-desc">Basierend auf Echtzeit-Daten, Formkurven und statistischer Analyse.</p>
-      </div>
-      <a href="#" class="view-all">Alle Tipps <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-    </div>
-    <div class="tips-grid">
-
-      <div class="tip-card reveal">
-        <div class="tip-meta">
-          <span class="tip-league">BUNDESLIGA</span>
-          <span class="tip-time">Heute, 20:30</span>
-        </div>
-        <div class="tip-match">
-          <div class="tip-team"><div class="tip-crest">&#9899;</div><div class="tip-team-name">Dortmund</div></div>
-          <span class="tip-vs">VS</span>
-          <div class="tip-team"><div class="tip-crest">&#128308;</div><div class="tip-team-name">Bayern</div></div>
-        </div>
-        <div class="tip-prediction">
-          <div class="tip-pred-label">KI-Vorhersage</div>
-          <div class="tip-pred-value">Uber 2.5 Tore</div>
-        </div>
-        <div class="tip-bottom">
-          <div class="tip-confidence"><div class="conf-bar"><div class="conf-fill" style="width:87%"></div></div><span class="conf-pct">87%</span></div>
-          <span class="tip-odds">@ 1.72</span>
-        </div>
-      </div>
-
-      <div class="tip-card reveal">
-        <div class="tip-meta">
-          <span class="tip-league">PREMIER LEAGUE</span>
-          <span class="tip-time">Heute, 21:00</span>
-        </div>
-        <div class="tip-match">
-          <div class="tip-team"><div class="tip-crest">&#128309;</div><div class="tip-team-name">Chelsea</div></div>
-          <span class="tip-vs">VS</span>
-          <div class="tip-team"><div class="tip-crest">&#128993;</div><div class="tip-team-name">Arsenal</div></div>
-        </div>
-        <div class="tip-prediction">
-          <div class="tip-pred-label">KI-Vorhersage</div>
-          <div class="tip-pred-value">Beide Teams treffen</div>
-        </div>
-        <div class="tip-bottom">
-          <div class="tip-confidence"><div class="conf-bar"><div class="conf-fill" style="width:79%"></div></div><span class="conf-pct">79%</span></div>
-          <span class="tip-odds">@ 1.85</span>
-        </div>
-      </div>
-
-      <div class="tip-card reveal">
-        <div class="tip-meta">
-          <span class="tip-league">LA LIGA</span>
-          <span class="tip-time">Morgen, 18:00</span>
-        </div>
-        <div class="tip-match">
-          <div class="tip-team"><div class="tip-crest">&#128995;</div><div class="tip-team-name">Barcelona</div></div>
-          <span class="tip-vs">VS</span>
-          <div class="tip-team"><div class="tip-crest">&#9898;</div><div class="tip-team-name">Real Madrid</div></div>
-        </div>
-        <div class="tip-prediction">
-          <div class="tip-pred-label">KI-Vorhersage</div>
-          <div class="tip-pred-value">Barcelona Sieg</div>
-        </div>
-        <div class="tip-bottom">
-          <div class="tip-confidence"><div class="conf-bar"><div class="conf-fill" style="width:64%"></div></div><span class="conf-pct">64%</span></div>
-          <span class="tip-odds">@ 2.10</span>
-        </div>
-      </div>
-
-      <div class="tip-card reveal">
-        <div class="tip-meta">
-          <span class="tip-league">CHAMPIONS LEAGUE</span>
-          <span class="tip-time">Morgen, 21:00</span>
-        </div>
-        <div class="tip-match">
-          <div class="tip-team"><div class="tip-crest">&#128308;</div><div class="tip-team-name">Liverpool</div></div>
-          <span class="tip-vs">VS</span>
-          <div class="tip-team"><div class="tip-crest">&#128309;</div><div class="tip-team-name">Inter</div></div>
-        </div>
-        <div class="tip-prediction">
-          <div class="tip-pred-label">KI-Vorhersage</div>
-          <div class="tip-pred-value">Unter 3.5 Tore</div>
-        </div>
-        <div class="tip-bottom">
-          <div class="tip-confidence"><div class="conf-bar"><div class="conf-fill" style="width:72%"></div></div><span class="conf-pct">72%</span></div>
-          <span class="tip-odds">@ 1.55</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<section class="wins-section">
-  <div class="container">
-    <div class="section-header reveal">
-      <div>
-        <div class="section-label">Live aus der Community</div>
-        <h2 class="section-title">Aktuelle Gewinne</h2>
-      </div>
-    </div>
-    <div class="wins-track reveal">
-      <div class="win-card">
-        <div class="win-header"><div class="win-avatar">MK</div><div><div class="win-user">@MaxK_89</div><div class="win-time">vor 12 Min.</div></div></div>
-        <div class="win-details">3er-Kombi: Bundesliga<br>Dortmund, Leipzig, Leverkusen</div>
-        <div class="win-amount">+340 &euro;</div>
-      </div>
-      <div class="win-card">
-        <div class="win-header"><div class="win-avatar">LS</div><div><div class="win-user">@LukasS</div><div class="win-time">vor 28 Min.</div></div></div>
-        <div class="win-details">Einzelwette: Uber 2.5 Tore<br>Chelsea vs Arsenal</div>
-        <div class="win-amount">+185 &euro;</div>
-      </div>
-      <div class="win-card">
-        <div class="win-header"><div class="win-avatar">AW</div><div><div class="win-user">@AnnaW</div><div class="win-time">vor 45 Min.</div></div></div>
-        <div class="win-details">4er-Kombi: Mixed Ligen<br>Premier League + La Liga</div>
-        <div class="win-amount">+890 &euro;</div>
-      </div>
-      <div class="win-card">
-        <div class="win-header"><div class="win-avatar">TR</div><div><div class="win-user">@TobiR</div><div class="win-time">vor 1 Std.</div></div></div>
-        <div class="win-details">Einzelwette: Bayern Sieg<br>Bayern vs Frankfurt</div>
-        <div class="win-amount">+120 &euro;</div>
-      </div>
-      <div class="win-card">
-        <div class="win-header"><div class="win-avatar">JP</div><div><div class="win-user">@JanP_Pro</div><div class="win-time">vor 2 Std.</div></div></div>
-        <div class="win-details">5er-Kombi: Champions League<br>Liverpool, Real, Bayern, PSG, City</div>
-        <div class="win-amount">+2.150 &euro;</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="so-funktionierts">
-  <div class="container">
-    <div style="text-align:center; margin-bottom:40px;" class="reveal">
-      <div class="section-label">So funktioniert's</div>
-      <h2 class="section-title">In 3 Schritten zum Gewinn</h2>
-    </div>
-    <div class="steps-grid">
-      <div class="step-card reveal">
-        <div class="step-num">1</div>
-        <h3 class="step-title">KI analysiert Daten</h3>
-        <p class="step-desc">Statistiken, Formkurven, Verletzungen und historische Ergebnisse aus 400+ Ligen werden ausgewertet.</p>
-      </div>
-      <div class="step-card reveal">
-        <div class="step-num">2</div>
-        <h3 class="step-title">Tipps werden generiert</h3>
-        <p class="step-desc">Basierend auf der Analyse erstellt die KI Vorhersagen mit Trefferwahrscheinlichkeit und Quoten.</p>
-      </div>
-      <div class="step-card reveal">
-        <div class="step-num">3</div>
-        <h3 class="step-title">Du gewinnst</h3>
-        <p class="step-desc">Platziere deine Wetten bei einem Partner-Wettanbieter und profitiere von datenbasierten Tipps.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="bookie-section" id="wettanbieter">
-  <div class="container">
-    <div class="section-header reveal">
-      <div>
-        <div class="section-label">Wettanbieter</div>
-        <h2 class="section-title">Top Wettanbieter 2026</h2>
-        <p class="section-desc">Lizenzierte Anbieter mit den besten Bonus-Angeboten.</p>
-      </div>
-    </div>
-    <div class="bookie-grid">
-      <div class="bookie-card reveal">
-        <div class="bookie-icon" style="background:linear-gradient(135deg,#1B5E20,#4CAF50);">B3</div>
-        <div class="bookie-name">bet365</div>
-        <div class="bookie-bonus">100 &euro;</div>
-        <div class="bookie-bonus-label">Willkommensbonus</div>
-        <div class="bookie-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <ul class="bookie-features"><li>Live-Streaming</li><li>Cash-Out Funktion</li><li>Bet Builder Tool</li></ul>
-        <a href="#" class="bookie-cta">Bonus sichern</a>
-      </div>
-      <div class="bookie-card reveal">
-        <div class="bookie-icon" style="background:linear-gradient(135deg,#0D47A1,#42A5F5);">TW</div>
-        <div class="bookie-name">Tipico</div>
-        <div class="bookie-bonus">100 &euro;</div>
-        <div class="bookie-bonus-label">100% Einzahlungsbonus</div>
-        <div class="bookie-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <ul class="bookie-features"><li>Deutsche Lizenz</li><li>Schnelle Auszahlung</li><li>Top Bundesliga-Quoten</li></ul>
-        <a href="#" class="bookie-cta">Bonus sichern</a>
-      </div>
-      <div class="bookie-card reveal">
-        <div class="bookie-icon" style="background:linear-gradient(135deg,#BF360C,#FF7043);">BW</div>
-        <div class="bookie-name">Betway</div>
-        <div class="bookie-bonus">150 &euro;</div>
-        <div class="bookie-bonus-label">Freiwette Paket</div>
-        <div class="bookie-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
-        <ul class="bookie-features"><li>eSports Wetten</li><li>Mobile App</li><li>24/7 Support</li></ul>
-        <a href="#" class="bookie-cta">Bonus sichern</a>
-      </div>
-      <div class="bookie-card reveal">
-        <div class="bookie-icon" style="background:linear-gradient(135deg,#E65100,#FFA726);">BN</div>
-        <div class="bookie-name">Bwin</div>
-        <div class="bookie-bonus">100 &euro;</div>
-        <div class="bookie-bonus-label">Joker Wette</div>
-        <div class="bookie-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
-        <ul class="bookie-features"><li>Grosse Sportauswahl</li><li>Live-Wetten</li><li>PayPal verfugbar</li></ul>
-        <a href="#" class="bookie-cta">Bonus sichern</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="newsletter" id="newsletter">
-  <div class="container">
-    <div class="newsletter-inner reveal">
-      <div class="section-label">Newsletter</div>
-      <h2 class="section-title">Tagliche KI-Tipps in dein Postfach</h2>
-      <p class="section-desc">Jeden Morgen die besten Vorhersagen - kostenlos.</p>
-      <form class="newsletter-form" onsubmit="event.preventDefault();">
-        <input type="email" placeholder="Deine E-Mail-Adresse" required>
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-label">&#128279; Beliebte Links</div>
+    <ul class="sidebar-nav">
+      <li><a href="#"><span class="nav-icon">&#9917;</span> Heutige Tipps</a></li>
+      <li><a href="#"><span class="nav-icon">&#127942;</span> Beste Gratiswetten</a></li>
+      <li><a href="#"><span class="nav-icon">&#127873;</span> Angebote</a></li>
+      <li><a href="#"><span class="nav-icon">&#128202;</span> Wett-Builder Stats</a></li>
+      <li><a href="#"><span class="nav-icon">&#128200;</span> Akku Stats</a></li>
+      <li><a href="#"><span class="nav-icon">&#128197;</span> Spielplan</a></li>
+      <li><a href="#"><span class="nav-icon">&#128302;</span> KI-Vorhersagen</a></li>
+      <li><a href="#"><span class="nav-icon">&#127381;</span> Gratiswetten</a></li>
+    </ul>
+    <div class="sidebar-card">
+      <h4>KI-Tipps direkt in dein Postfach</h4>
+      <p>Taglicher Newsletter mit den besten Vorhersagen. In 5 Minuten gelesen.</p>
+      <form class="subscribe-form" onsubmit="event.preventDefault()">
+        <input type="email" placeholder="Deine E-Mail">
         <button type="submit">Abonnieren</button>
       </form>
-      <p class="newsletter-note">Kein Spam. Jederzeit abbestellbar.</p>
     </div>
-  </div>
-</section>
+  </aside>
+
+  <main class="main">
+    <!-- PROMO BANNER -->
+    <div class="promo-banner">
+      <div class="promo-logo">&#127920; TippsArena</div>
+      <h2>Kostenlose KI-Wett-Tipps fur die besten Ligen</h2>
+      <div class="promo-sub">Jeden Tag neue Vorhersagen</div>
+      <div class="promo-fine">KI-gestutzte Analyse aus 400+ Ligen. Statistiken, Formkurven und historische Daten fur prazise Tipps. Kostenlos und unverbindlich.</div>
+    </div>
+
+    <!-- FEATURED MATCHES -->
+    <div class="section-header">
+      <h2 class="section-title">Heutige Spiele</h2>
+      <a href="#" class="view-all">Alle ansehen</a>
+    </div>
+    <div class="matches-scroll">
+      <div class="match-card">
+        <div class="match-league">Bundesliga</div>
+        <div class="match-teams">
+          <div class="match-flag">&#127465;&#127466;</div>
+          <div class="match-flag">&#127465;&#127466;</div>
+        </div>
+        <div class="match-codes"><span>BVB</span><span>FCB</span></div>
+        <div class="match-time">Heute &bull; 20:30</div>
+        <div class="match-tips">&#128302; 14 Tipps</div>
+      </div>
+      <div class="match-card">
+        <div class="match-league">Premier League</div>
+        <div class="match-teams">
+          <div class="match-flag">&#127468;&#127463;</div>
+          <div class="match-flag">&#127468;&#127463;</div>
+        </div>
+        <div class="match-codes"><span>CHE</span><span>ARS</span></div>
+        <div class="match-time">Heute &bull; 21:00</div>
+        <div class="match-tips">&#128302; 12 Tipps</div>
+      </div>
+      <div class="match-card">
+        <div class="match-league">La Liga</div>
+        <div class="match-teams">
+          <div class="match-flag">&#127466;&#127480;</div>
+          <div class="match-flag">&#127466;&#127480;</div>
+        </div>
+        <div class="match-codes"><span>BAR</span><span>RMA</span></div>
+        <div class="match-time">Morgen &bull; 18:00</div>
+        <div class="match-tips">&#128302; 9 Tipps</div>
+      </div>
+      <div class="match-card">
+        <div class="match-league">Champions League</div>
+        <div class="match-teams">
+          <div class="match-flag">&#127468;&#127463;</div>
+          <div class="match-flag">&#127470;&#127481;</div>
+        </div>
+        <div class="match-codes"><span>LIV</span><span>INT</span></div>
+        <div class="match-time">Morgen &bull; 21:00</div>
+        <div class="match-tips">&#128302; 7 Tipps</div>
+      </div>
+      <div class="match-card">
+        <div class="match-league">Serie A</div>
+        <div class="match-teams">
+          <div class="match-flag">&#127470;&#127481;</div>
+          <div class="match-flag">&#127470;&#127481;</div>
+        </div>
+        <div class="match-codes"><span>JUV</span><span>NAP</span></div>
+        <div class="match-time">Morgen &bull; 20:45</div>
+        <div class="match-tips">&#128302; 5 Tipps</div>
+      </div>
+      <div class="match-card">
+        <div class="match-league">Ligue 1</div>
+        <div class="match-teams">
+          <div class="match-flag">&#127467;&#127479;</div>
+          <div class="match-flag">&#127467;&#127479;</div>
+        </div>
+        <div class="match-codes"><span>PSG</span><span>OLY</span></div>
+        <div class="match-time">Freitag &bull; 21:00</div>
+        <div class="match-tips">&#128302; 3 Tipps</div>
+      </div>
+    </div>
+
+    <!-- TIPS LIST -->
+    <div class="section-header">
+      <h2 class="section-title">Aktuelle Tipps</h2>
+      <a href="#" class="view-all">Alle Tipps</a>
+    </div>
+    <div class="tips-list">
+      <div class="tip-item">
+        <div class="tip-dot"></div>
+        <div class="tip-content">
+          <a href="#" class="tip-title">Dortmund und Uber 2.5 - Spielquoten und Uber/Unter 2.5</a>
+          <div class="tip-meta">Dortmund vs Bayern &bull; Heute &bull; 20:30</div>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-dot"></div>
+        <div class="tip-content">
+          <a href="#" class="tip-title">Chelsea und Uber 2.5 - Spielquoten und Uber/Unter 2.5</a>
+          <div class="tip-meta">Chelsea vs Arsenal &bull; Heute &bull; 21:00</div>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-dot"></div>
+        <div class="tip-content">
+          <a href="#" class="tip-title">Barcelona Sieg - Spielquoten und Uber/Unter 2.5</a>
+          <div class="tip-meta">Barcelona vs Real Madrid &bull; Morgen &bull; 18:00</div>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-dot"></div>
+        <div class="tip-content">
+          <a href="#" class="tip-title">Liverpool und Unter 3.5 - Spielquoten und Uber/Unter 2.5</a>
+          <div class="tip-meta">Liverpool vs Inter &bull; Morgen &bull; 21:00</div>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-dot"></div>
+        <div class="tip-content">
+          <a href="#" class="tip-title">Juventus und BTTS - Spielquoten und Beide Teams Treffen</a>
+          <div class="tip-meta">Juventus vs Napoli &bull; Morgen &bull; 20:45</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOOST -->
+    <div class="boost-card">
+      <div class="boost-logo">TA</div>
+      <div class="boost-content">
+        <div class="boost-odds"><s>War 46.00</s> &#128302; Jetzt 61.00</div>
+        <div class="boost-label">Geboostete Quote laden &#8599;</div>
+      </div>
+    </div>
+
+    <!-- OFFER -->
+    <div class="offer-card">
+      <div class="offer-info">
+        <div class="offer-small">Neu bei Tipico?</div>
+        <div class="offer-headline">Setze 10&euro; und erhalte 50&euro; in Gratiswetten</div>
+        <div class="offer-fine">Nur fur Neukunden. Mindesteinzahlung 10&euro;. Mindestquote 1.50. Es gelten die AGB. 18+</div>
+      </div>
+      <a href="#" class="offer-claim">&#127381; Angebot sichern</a>
+    </div>
+
+    <!-- ARTICLE CARDS -->
+    <div class="article-card">
+      <h3><a href="#">&#9917; Super Boost: Dortmund gewinnt, Uber 2.5 Tore und beide Teams treffen</a></h3>
+      <p>Unsere KI-Analyse zeigt eine hohe Wahrscheinlichkeit fur ein torreiches Spiel im Signal Iduna Park. Dortmund hat in den letzten 5 Heimspielen durchschnittlich 3.2 Tore pro Spiel erzielt.</p>
+      <div class="article-author">
+        <div class="author-info">
+          <div class="author-avatar">TA</div>
+          <span class="author-name">TippsArena KI</span>
+        </div>
+        <div class="article-actions">
+          <a href="#">&#128278; Speichern</a>
+          <a href="#">&#128203; Kopieren</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="article-card">
+      <h3><a href="#">&#128200; Bundesliga Wochenend-Tipps: 3er-Kombi mit 87% KI-Konfidenz</a></h3>
+      <p>Die Datenanalyse der letzten 10 Spieltage zeigt klare Muster bei drei Bundesliga-Partien. Formkurven, Expected Goals und Defensiv-Statistiken deuten auf eine starke Kombination hin.</p>
+      <div class="article-author">
+        <div class="author-info">
+          <div class="author-avatar">TA</div>
+          <span class="author-name">TippsArena KI</span>
+        </div>
+        <div class="article-actions">
+          <a href="#">&#128278; Speichern</a>
+          <a href="#">&#128203; Kopieren</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="article-card">
+      <h3><a href="#">&#127942; Champions League Vorhersagen: Liverpool vs Inter - Taktische Analyse</a></h3>
+      <p>Historisch gesehen enden 67% der Duelle zwischen englischen und italienischen Teams mit unter 3 Toren. Unsere KI bestatigt diesen Trend mit einer Konfidenz von 72%.</p>
+      <div class="article-author">
+        <div class="author-info">
+          <div class="author-avatar">TA</div>
+          <span class="author-name">TippsArena KI</span>
+        </div>
+        <div class="article-actions">
+          <a href="#">&#128278; Speichern</a>
+          <a href="#">&#128203; Kopieren</a>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
 
 <footer class="footer">
-  <div class="container">
+  <div class="footer-inner">
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="#" class="logo">Tipps<span>Arena</span></a>
-        <p>Datenbasierte Sportwetten-Tipps, powered by KI. Kostenlos, transparent und unabhangig.</p>
-        <div class="footer-social">
-          <a href="#" title="X">X</a>
-          <a href="#" title="Instagram">IG</a>
-          <a href="#" title="Telegram">TG</a>
-          <a href="#" title="Facebook">FB</a>
-        </div>
+        <p>KI-gestutzte Sportwetten-Tipps. Kostenlos, transparent und datenbasiert.</p>
       </div>
       <div class="footer-col">
         <h4>Tipps</h4>
-        <a href="#">Bundesliga</a>
-        <a href="#">Premier League</a>
-        <a href="#">La Liga</a>
-        <a href="#">Champions League</a>
-        <a href="#">Serie A</a>
+        <a href="#">Bundesliga</a><a href="#">Premier League</a><a href="#">La Liga</a><a href="#">Champions League</a><a href="#">Serie A</a>
       </div>
       <div class="footer-col">
         <h4>Ressourcen</h4>
-        <a href="#">Wett-Rechner</a>
-        <a href="#">Strategie-Guide</a>
-        <a href="#">Quoten-Vergleich</a>
-        <a href="#">Blog</a>
+        <a href="#">Wett-Rechner</a><a href="#">Strategie-Guide</a><a href="#">Quoten-Vergleich</a><a href="#">Blog</a>
       </div>
       <div class="footer-col">
         <h4>Rechtliches</h4>
-        <a href="#">Impressum</a>
-        <a href="#">Datenschutz</a>
-        <a href="#">AGB</a>
-        <a href="#">Affiliate-Hinweis</a>
+        <a href="#">Impressum</a><a href="#">Datenschutz</a><a href="#">AGB</a><a href="#">Affiliate-Hinweis</a>
       </div>
     </div>
     <div class="footer-bottom">
       <div class="footer-legal">&copy; 2026 TippsArena. Alle Rechte vorbehalten.</div>
       <div class="footer-age">
         <span class="age-badge">18+</span>
-        <span>Glucksspiel kann suchtig machen. Spielen Sie verantwortungsbewusst. Hilfe unter <strong>bzga.de</strong></span>
+        <span>Glucksspiel kann suchtig machen. Hilfe unter <strong>bzga.de</strong></span>
       </div>
     </div>
   </div>
 </footer>
 
 <script>
-const menuToggle = document.getElementById('menuToggle');
-const nav = document.getElementById('nav');
-menuToggle.addEventListener('click', () => {
-  menuToggle.classList.toggle('open');
-  nav.classList.toggle('open');
+document.getElementById('menuBtn').addEventListener('click',()=>{
+  const sb=document.getElementById('sidebar');
+  sb.style.display=sb.style.display==='none'?'block':'none';
 });
-nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-  menuToggle.classList.remove('open');
-  nav.classList.remove('open');
-}));
-const revealEls = document.querySelectorAll('.reveal');
-const obs = new IntersectionObserver((entries) => {
-  entries.forEach((e, i) => {
-    if (e.isIntersecting) {
-      setTimeout(() => e.target.classList.add('visible'), i * 60);
-      obs.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.1 });
-revealEls.forEach(el => obs.observe(el));
 </script>
 </body>
 </html>
